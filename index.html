@@ -2,6 +2,7 @@
 <head>
 	<title>StarWars RPG</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -18,10 +19,10 @@
 	          <div class="panel-body">
 	            <div class="row text-center" id="CharacterSelection">
 	            	<!-- All characters will be appeneded back here after the game ends -->
-					<div id = "Obi-Wan-Kenobi" class = "col-2">Character 1 </div>
-					<div id = "Luke-SkyWalker" class = "col-2">Character 2 </div>
-					<div id = "Darth-Sidious" class = "col-2">Character 3 </div>
-					<div id = "Darth-Maul" class = "col-2">Character 4 </div>
+					<div id = "Obi-Wan-Kenobi" class = "col-2 character">Character 1 </div>
+					<div id = "Luke-SkyWalker" class = "col-2 character">Character 2 </div>
+					<div id = "Darth-Sidious" class = "col-2 character">Character 3 </div>
+					<div id = "Darth-Maul" class = "col-2 character">Character 4 </div>
 	            </div>
 	          </div>
 	        </div>
@@ -55,7 +56,7 @@
 	          <div class="panel-body">
 	            <div class="row text-center" id = "Defender">
 	            	<!-- Fix the style on this... its shifted to the left too much -->
-					<button class="btn btn-danger"> Attack </button>
+					<button class="btn btn-danger" id="Attack-Button"> Attack </button>
 	            </div>
 	          </div>
 	        </div>
