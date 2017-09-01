@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>StarWars RPG</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+
+<body>
+	<header class = "text-center header">
+		<h1>StarWars RPG Game.</h1>
+	</header>
+
+	<div class = "container">
+		<div class = "col-lg-6">
+	        <div class="panel panel-default">
+	          <div class="panel-heading">
+	            <h3 class="panel-title">Select a character</h3>
+	          </div>
+	          <div class="panel-body">
+	            <div class="row text-center" id="CharacterSelection">
+	            	<!-- All characters will be appeneded back here after the game ends -->
+					<div id = "Obi-Wan-Kenobi" class = "col-2">Character 1 </div>
+					<div id = "Luke-SkyWalker" class = "col-2">Character 2 </div>
+					<div id = "Darth-Sidious" class = "col-2">Character 3 </div>
+					<div id = "Darth-Maul" class = "col-2">Character 4 </div>
+	            </div>
+	          </div>
+	        </div>
+
+	        <div class=" panel panel-default">
+	          <div class="panel-heading">
+	            <h3 class="panel-title">Your Character</h3>
+	          </div>
+	          <div class="panel-body">
+	            <div class="row text-center">
+	            	<!-- The character the user selects will be appended here -->
+	            </div>
+	          </div>
+	        </div>
+
+	        <div class=" panel panel-default">
+	          <div class="panel-heading">
+	            <h3 class="panel-title"> Enemies Avaliable to Attack </h3>
+	          </div>
+	          <div class="panel-body">
+	            <div class=" row text-center" id="EnemiesToAttack">
+	            	<!-- The rest of the characters will be appeneded here after the user selects a character to play with -->
+	            </div>
+	          </div>
+	        </div>
+				
+ 			<div class=" panel panel-default">
+	          <div class="panel-heading">
+	            <h3 class="panel-title"> Fight Section </h3>
+	          </div>
+	          <div class="panel-body">
+	            <div class="row text-center" id = "Defender">
+	            	<!-- Fix the style on this... its shifted to the left too much -->
+					<button class="btn btn-danger"> Attack </button>
+	            </div>
+	          </div>
+	        </div>
+			
+	        <div class=" panel panel-default">
+	          <div class="panel-heading">
+	            <h3 class="panel-title"> Defender </h3>
+	          </div>
+	          <div class="panel-body">
+	            <div class="row text-center" id = "Defender">
+	            	<!-- The character that the user wants to attack will be appended here -->
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+
+
+
+</body>
+</html>
