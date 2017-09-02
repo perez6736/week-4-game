@@ -34,36 +34,45 @@ var isADefender = false;
 
 //Selecting a character. 
 
-if(!isGameStarted){ //check if game is 
-	obiHTML.on("click", function(){ //selects obiwan
+ //check if game is started
+obiHTML.on("click", function(){ //selects obiwan
+	if(!isGameStarted){
 		$("#your-character").append(obiHTML);
 		$("#Enemies-To-Attack").append(lukeHTML);
 		$("#Enemies-To-Attack").append(sidiousHTML);
 		$("#Enemies-To-Attack").append(maulHTML);
+		isGameStarted = true;
+	}
 
-	});
+});
 
-	lukeHTML.on("click", function(){ //selects luke
+lukeHTML.on("click", function(){ //selects luke
+	if(!isGameStarted){
 		$("#your-character").append(lukeHTML);
 		$("#Enemies-To-Attack").append(obiHTML);
 		$("#Enemies-To-Attack").append(sidiousHTML);
 		$("#Enemies-To-Attack").append(maulHTML);
+		isGameStarted = true;
+	}	
 
-	});
+});
 
-	sidiousHTML.on("click", function(){ ///selects sidious
+sidiousHTML.on("click", function(){ ///selects sidious
+	if(!isGameStarted){
 		$("#your-character").append(sidiousHTML);
 		$("#Enemies-To-Attack").append(lukeHTML);
 		$("#Enemies-To-Attack").append(obiHTML);
 		$("#Enemies-To-Attack").append(maulHTML);
+		isGameStarted = true;
+	}
+});
 
-	});
-
-	maulHTML.on("click", function(){ //selects  maul
+maulHTML.on("click", function(){ //selects  maul
+	if(!isGameStarted){
 		$("#your-character").append(maulHTML);
 		$("#Enemies-To-Attack").append(lukeHTML);
 		$("#Enemies-To-Attack").append(sidiousHTML);
 		$("#Enemies-To-Attack").append(obiHTML);
-
-	});
-}
+		isGameStarted = true;
+	}
+});
