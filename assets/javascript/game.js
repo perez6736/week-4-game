@@ -4,6 +4,10 @@ var obiHTML = $("#Obi-Wan-Kenobi");
 var lukeHTML = $("#Luke-SkyWalker");
 var sidiousHTML = $("#Darth-Sidious")
 var maulHTML = $("#Darth-Maul");
+var obiHealthHTML = $("#obi-health");
+var lukeHealthHTML = $("#luke-health");
+var sidiousHealthHTML = $("#sidious-health");
+var maulHealthHTML = $("#maul-health");
 
 //characters 
 var obi = {
@@ -43,8 +47,16 @@ function isThereADefender(){
 		return false;
 	}
 } 
+function UpdateHealthBars(){ //this will update the health on the html
+	obiHealthHTML.html(obi.health);
+	lukeHealthHTML.html(luke.health);
+	sidiousHealthHTML.html(sidious.health);
+	maulHealthHTML.html(maul.health);
+}
 
- 
+//Game starts here --------------------------------------------------
+
+UpdateHealthBars();
 
 // The on click events ----------------------------- 
 obiHTML.on("click", function(){ 
