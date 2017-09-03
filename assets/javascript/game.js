@@ -53,6 +53,23 @@ function UpdateHealthBars(){ //this will update the health on the html
 	sidiousHealthHTML.html(sidious.health);
 	maulHealthHTML.html(maul.health);
 }
+// make sure you pass in the parameters correctly. 
+function SelectACharacter(yourCharacter, enemy1, enemy2, enemy3, yourCharacterHTML, enemy1HTML, enemy2HTML, enemy3HTML){
+		$("#your-character").append(yourCharacterHTML);     // add selected character to your character
+		$("#Enemies-To-Attack").append(enemy1HTML); // add remaining characters to enemies 
+		$("#Enemies-To-Attack").append(enemy2HTML);
+		$("#Enemies-To-Attack").append(enemy3HTML);
+		isGameStarted = true;
+		yourCharacter.position = "yourCharacter";
+		enemy1.position = "enemy";
+		enemy2.position = "enemy";
+		enemy3.position = "enemy";
+}
+
+function SelectDefender(character, characterHTML){
+		$("#Defender").append(characterHTML);
+		character.position = "defender";
+}
 
 //Game starts here --------------------------------------------------
 
@@ -60,78 +77,40 @@ UpdateHealthBars();
 
 // The on click events ----------------------------- 
 obiHTML.on("click", function(){ 
-	if(!isGameStarted){ //check if game is started
-		$("#your-character").append(obiHTML);     // add selected character to your character
-		$("#Enemies-To-Attack").append(lukeHTML); // add remaining characters to enemies 
-		$("#Enemies-To-Attack").append(sidiousHTML);
-		$("#Enemies-To-Attack").append(maulHTML);
-		isGameStarted = true;
-		obi.position = "yourCharacter";
-		luke.position = "enemy";
-		sidious.position = "enemy";
-		maul.position = "enemy";
-	}
-	// check if character is an enemy and if there is already a defender
-	else if (obi.position == "enemy" && !isThereADefender()){
-		$("#Defender").append(obiHTML);
-		obi.position = "defender";
+	if(!isGameStarted){
+		SelectACharacter(obi, luke, sidious, maul, obiHTML, lukeHTML, sidiousHTML, maulHTML);
 	}
 
+	else if (obi.position == "enemy" && !isThereADefender()){
+		SelectDefender(obi, obiHTML);
+	}
 });
 
 lukeHTML.on("click", function(){
 	if(!isGameStarted){
-		$("#your-character").append(lukeHTML);
-		$("#Enemies-To-Attack").append(obiHTML);
-		$("#Enemies-To-Attack").append(sidiousHTML);
-		$("#Enemies-To-Attack").append(maulHTML);
-		isGameStarted = true;
-		obi.position = "enemy";
-		luke.position = "yourCharacter";
-		sidious.position = "enemy";
-		maul.position = "enemy";
+		SelectACharacter(luke, obi, sidious, maul, lukeHTML, obiHTML, sidiousHTML, maulHTML);
 	}
 
 	else if (luke.position == "enemy" && !isThereADefender()){
-
-		$("#Defender").append(lukeHTML);
-		luke.position = "defender";
+		SelectDefender(luke, lukeHTML);
 	}
 
 });
 
 sidiousHTML.on("click", function(){ 
 	if(!isGameStarted){
-		$("#your-character").append(sidiousHTML);
-		$("#Enemies-To-Attack").append(lukeHTML);
-		$("#Enemies-To-Attack").append(obiHTML);
-		$("#Enemies-To-Attack").append(maulHTML);
-		isGameStarted = true;
-		obi.position = "enemy";
-		luke.position = "enemy";
-		sidious.position = "yourCharacter";
-		maul.position = "enemy";
+		SelectACharacter(sidious, luke, obi, maul, sidiousHTML, lukeHTML, obiHTML, maulHTML);
 	}
 	else if (sidious.position == "enemy" && !isThereADefender()){
-		$("#Defender").append(sidiousHTML);
-		sidious.position = "defender";
+		SelectDefender(sidious, sidiousHTML);
 	}
 });
 
 maulHTML.on("click", function(){ 
 	if(!isGameStarted){
-		$("#your-character").append(maulHTML);
-		$("#Enemies-To-Attack").append(lukeHTML);
-		$("#Enemies-To-Attack").append(sidiousHTML);
-		$("#Enemies-To-Attack").append(obiHTML);
-		isGameStarted = true;
-		obi.position = "enemy";
-		luke.position = "enemy";
-		sidious.position = "enemy";
-		maul.position = "yourCharacter";
+		SelectACharacter(maul, luke, sidious, obi, maulHTML, lukeHTML, sidiousHTML, obiHTML);
 	}
 	else if (maul.position == "enemy" && !isThereADefender()){
-		$("#Defender").append(maulHTML);
-		maul.position = "defender";
+		SelectDefender(maul, maulHTML);
 	}
 });
