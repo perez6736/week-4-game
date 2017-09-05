@@ -9,31 +9,33 @@ var lukeHealthHTML = $("#luke-health");
 var sidiousHealthHTML = $("#sidious-health");
 var maulHealthHTML = $("#maul-health");
 var attackbuttonHTML = $("#Attack-Button");
+var atkMessageHTML = $("#atk-message");
+var defenderMessageHTML = $("#defender-message");
 
 //characters 
 var obi = {
-	name: "obi-Wan",
+	name: "Obi-Wan",
 	health: 120,
 	attackPower: 8,
 	position: "available"
 }
 
 var luke = {
-	name: "luke",
+	name: "Luke Skywalker",
 	health: 100,
 	attackPower: 8,
 	position: "available"
 }
 
 var sidious = {
-	name: "darth sidious",
+	name: "Darth Sidious",
 	health: 150,
 	attackPower: 8,
 	position: "available"
 }
 
 var maul = {
-	name: "darth maul",
+	name: "Darth Maul",
 	health: 180,
 	attackPower: 8,
 	position: "available"
@@ -48,7 +50,8 @@ var wins = 0;
 
 //helper functions 
 function isThereADefender(){
-	if(obi.position == "defender" || luke.position == "defender" || sidious.position == "defender" || maul.position == "defender"){
+	debugger;
+	if(obi.position === "defender" || luke.position === "defender" || sidious.position === "defender" || maul.position === "defender"){
 		return true;
 	}
 	else{
@@ -72,11 +75,13 @@ function SelectACharacter(yourCharacter, enemy1, enemy2, enemy3, yourCharacterHT
 		enemy1.position = "enemy";
 		enemy2.position = "enemy";
 		enemy3.position = "enemy";
+		debugger;
 }
 // 
 function SelectDefender(character, characterHTML){
 		$("#Defender").append(characterHTML);
 		character.position = "defender";
+		debugger;
 }
 
 //find who is attacking looking at each characters position 
@@ -138,8 +143,29 @@ function theDefenderHTML(){
 
 function restartGame(){
 	// set the postions  to availiable 
+	obi.position = "available";
+	luke.position = "available";
+	maul.position = "available";
+	sidious.position = "available";
 	// se the divs to the original spot 
+	$("#CharacterSelection").append(obiHTML);
+	$("#CharacterSelection").append(lukeHTML);
+	$("#CharacterSelection").append(sidiousHTML);
+	$("#CharacterSelection").append(maulHTML);
 	// reset health and atk powers 
+	obi.health = 120;
+	obi.attackPower = 8;
+	luke.health = 100;
+	luke.attackPower = 8;
+	sidious.health = 150;
+	sidious.attackPower = 8;
+	maul.health = 180;
+	maul.attackPower = 8;
+	UpdateHealthBars();
+
+
+	//this needs to be false to let the player pick a new character. 
+	isGameStarted = false;
 }
 
 
@@ -149,6 +175,7 @@ UpdateHealthBars();
 
 // The on click events ----------------------------- 
 obiHTML.on("click", function(){ 
+	debugger;
 	if(!isGameStarted){
 		SelectACharacter(obi, luke, sidious, maul, obiHTML, lukeHTML, sidiousHTML, maulHTML);
 	}
@@ -160,6 +187,7 @@ obiHTML.on("click", function(){
 });
 
 lukeHTML.on("click", function(){
+	debugger;
 	if(!isGameStarted){
 		SelectACharacter(luke, obi, sidious, maul, lukeHTML, obiHTML, sidiousHTML, maulHTML);
 	}
@@ -171,6 +199,7 @@ lukeHTML.on("click", function(){
 });
 
 sidiousHTML.on("click", function(){ 
+	debugger;
 	if(!isGameStarted){
 		SelectACharacter(sidious, luke, obi, maul, sidiousHTML, lukeHTML, obiHTML, maulHTML);
 	}
@@ -180,6 +209,7 @@ sidiousHTML.on("click", function(){
 });
 
 maulHTML.on("click", function(){ 
+	debugger;
 	if(!isGameStarted){
 		SelectACharacter(maul, luke, sidious, obi, maulHTML, lukeHTML, sidiousHTML, obiHTML);
 	}
@@ -191,10 +221,13 @@ maulHTML.on("click", function(){
 attackbuttonHTML.on("click", function(){
 	//defenders health is reduced by the amount of atkpower of your characters 
 	theDefender().health -= usersCharacter().attackPower; 
+	atkMessageHTML.html("You attacked " + theDefender().name + " for " + usersCharacter().attackPower + " damage!" );
 	// your characters atk power increases with atk 
-	usersCharacter().attackPower += 8;
+	usersCharacter().attackPower += 2;
 	// your characters health is decreased by defenders atkpower
 	usersCharacter().health -= theDefender().attackPower;
+	defenderMessageHTML.html(theDefender().name + " attacked you for " + theDefender().attackPower + " damage!");
+
 
 	UpdateHealthBars();
 	if(theDefender().health <= 0){ //if the defender has less than or 0 hp
@@ -202,15 +235,19 @@ attackbuttonHTML.on("click", function(){
 		theDefender().health = 0; //set his hp to 0 so that it isnt negative
 		UpdateHealthBars(); //update html 
 		$("#Defender").empty(); // empty the defender div 
-		theDefender().position = "dead"; // make him die 
-		
+		theDefender().position = "dead"; // make him die and makes attacking disabled 	
 	}
 
 	if(usersCharacter().health <= 0){ //if you have less than or 0 hp 
 		console.log("you died");
 		usersCharacter().health = 0; //set your helth to 0 so it isnt negative 
 		UpdateHealthBars(); //update html 
-		usersCharacter().position = "dead" //make you dead. 
+		usersCharacter().position = "dead" //make you dead and unable to attack. 
+		losses += 1;
+		restartGame();
+
 	}
+
+
 
 });

@@ -11,7 +11,7 @@
 	</header>
 
 	<div class = "container">
-		<div class = "col-lg-6">
+		<div class = "col-lg-8">
 	        <div class="panel panel-default">
 	          <div class="panel-heading">
 	            <h3 class="panel-title">Select a character</h3>
@@ -20,7 +20,7 @@
 	            <div class="row text-center" id="CharacterSelection">
 	            	<!-- All characters will be appended back here after the game ends -->
 					<div id = "Obi-Wan-Kenobi" class = "col-2 character">Obi-Wan-Kenobi 
-						<div id="obi-health"></div>
+						<div id="obi-health"> </div>
 					</div>
 					<div id = "Luke-SkyWalker" class = "col-2 character"> Luke-SkyWalker 
 						<div id="luke-health"></div>
@@ -64,7 +64,8 @@
 	          <div class="panel-body">
 	            <div class="row text-center">
 					<button class="btn btn-danger" id="Attack-Button"> Attack </button>
-					<span> The message of what happened goes here. </span>
+					<div class ="col-4" id ="atk-message"></div>
+					<div class ="col-4" id ="defender-message"></div>
 	            </div>
 	          </div>
 	        </div>
