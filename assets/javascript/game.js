@@ -8,27 +8,32 @@ var obiHealthHTML = $("#obi-health");
 var lukeHealthHTML = $("#luke-health");
 var sidiousHealthHTML = $("#sidious-health");
 var maulHealthHTML = $("#maul-health");
+var attackbuttonHTML = $("#Attack-Button");
 
 //characters 
 var obi = {
+	name: "obi-Wan",
 	health: 120,
 	attackPower: 8,
 	position: "available"
 }
 
 var luke = {
+	name: "luke",
 	health: 100,
 	attackPower: 8,
 	position: "available"
 }
 
 var sidious = {
+	name: "darth sidious",
 	health: 150,
 	attackPower: 8,
 	position: "available"
 }
 
 var maul = {
+	name: "darth maul",
 	health: 180,
 	attackPower: 8,
 	position: "available"
@@ -71,6 +76,35 @@ function SelectDefender(character, characterHTML){
 		character.position = "defender";
 }
 
+//find who is attacking looking at each characters position 
+function usersCharacter(){
+	if(obi.position === "yourCharacter")
+		return obi;
+	else if (luke.position === "yourCharacter"){
+		return luke;
+	}
+	else if (maul.position === "yourCharacter"){
+		return maul;
+	}
+	else if (sidious.position === "yourCharacter"){
+		return sidious;
+	}
+}
+//returns the current defender. 
+function theDefender(){
+	if(obi.position === "defender")
+		return obi;
+	else if (luke.position === "defender"){
+		return luke;
+	}
+	else if (maul.position === "defender"){
+		return maul;
+	}
+	else if (sidious.position === "defender"){
+		return sidious;
+	}
+}
+
 //Game starts here --------------------------------------------------
 
 UpdateHealthBars();
@@ -84,6 +118,7 @@ obiHTML.on("click", function(){
 	else if (obi.position == "enemy" && !isThereADefender()){
 		SelectDefender(obi, obiHTML);
 	}
+
 });
 
 lukeHTML.on("click", function(){
@@ -113,4 +148,21 @@ maulHTML.on("click", function(){
 	else if (maul.position == "enemy" && !isThereADefender()){
 		SelectDefender(maul, maulHTML);
 	}
+});
+
+attackbuttonHTML.on("click", function(){
+	//defenders health is reduced by the amount of atkpower of your characters 
+	theDefender().health -= usersCharacter().attackPower; 
+	// your characters atk power increases with atk 
+	usersCharacter().attackPower += 8;
+	// your characters health is decreased by defenders atkpower
+	usersCharacter().health -= theDefender().attackPower;
+
+	UpdateHealthBars();
+	if(theDefender().health <= 0 || usersCharacter().health <= 0){
+		console.log("GAME OVER");
+	}
+
+	
+
 });
