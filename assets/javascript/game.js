@@ -41,6 +41,9 @@ var maul = {
 
 //variables for game
 var isGameStarted = false;
+var losses = 0;
+var wins = 0; 
+
 
 
 //helper functions 
@@ -131,6 +134,12 @@ function theDefenderHTML(){
 	else if (sidious.position === "defender"){
 		return sidiousHTML;
 	}
+}
+
+function restartGame(){
+	// set the postions  to availiable 
+	// se the divs to the original spot 
+	// reset health and atk powers 
 }
 
 
