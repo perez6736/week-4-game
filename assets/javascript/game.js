@@ -70,7 +70,7 @@ function SelectACharacter(yourCharacter, enemy1, enemy2, enemy3, yourCharacterHT
 		enemy2.position = "enemy";
 		enemy3.position = "enemy";
 }
-
+// 
 function SelectDefender(character, characterHTML){
 		$("#Defender").append(characterHTML);
 		character.position = "defender";
@@ -188,22 +188,20 @@ attackbuttonHTML.on("click", function(){
 	usersCharacter().health -= theDefender().attackPower;
 
 	UpdateHealthBars();
-	if(theDefender().health <= 0){
-		console.log("he dead");
-		theDefender().health = 0;
-		UpdateHealthBars();
-		$("#Defender").empty();
-		theDefender().position = "dead";
+	if(theDefender().health <= 0){ //if the defender has less than or 0 hp
+		console.log("he dead"); 
+		theDefender().health = 0; //set his hp to 0 so that it isnt negative
+		UpdateHealthBars(); //update html 
+		$("#Defender").empty(); // empty the defender div 
+		theDefender().position = "dead"; // make him die 
 		
 	}
 
-	if(usersCharacter().health <= 0){
+	if(usersCharacter().health <= 0){ //if you have less than or 0 hp 
 		console.log("you died");
-		usersCharacter().health = 0;
-		UpdateHealthBars();
-		usersCharacter().position = "dead"
+		usersCharacter().health = 0; //set your helth to 0 so it isnt negative 
+		UpdateHealthBars(); //update html 
+		usersCharacter().position = "dead" //make you dead. 
 	}
-
-	
 
 });
