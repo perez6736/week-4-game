@@ -162,6 +162,7 @@ function restartGame(){
 	$("#CharacterSelection").append(lukeHTML);
 	$("#CharacterSelection").append(sidiousHTML);
 	$("#CharacterSelection").append(maulHTML);
+	//resetEvents();
 	//this needs to be false to let the player pick a new character. 
 	isGameStarted = false;
 }
@@ -212,6 +213,7 @@ maulHTML.on("click", function(){
 	}
 });
 
+
 attackbuttonHTML.on("click", function(){
 	//defenders health is reduced by the amount of atkpower of your characters 
 	theDefender().health -= usersCharacter().attackPower; 
@@ -228,7 +230,7 @@ attackbuttonHTML.on("click", function(){
 		console.log("he dead"); 
 		theDefender().health = 0; //set his hp to 0 so that it isnt negative
 		UpdateHealthBars(); //update html 
-		$("#Defender").empty(); // empty the defender div 
+		theDefenderHTML().detach(); // empty the defender div 
 		atkMessageHTML.html("You killed " + theDefender().name);
 		defenderMessageHTML.html(" ");	
 		theDefender().position = "dead"; // make him die and makes attacking disabled 
