@@ -90,6 +90,20 @@ function usersCharacter(){
 		return sidious;
 	}
 }
+
+function usersCharacterHTML(){
+	if(obi.position === "yourCharacter")
+		return obiHTML;
+	else if (luke.position === "yourCharacter"){
+		return lukeHTML;
+	}
+	else if (maul.position === "yourCharacter"){
+		return maulHTML;
+	}
+	else if (sidious.position === "yourCharacter"){
+		return sidiousHTML;
+	}
+}
 //returns the current defender. 
 function theDefender(){
 	if(obi.position === "defender")
@@ -104,6 +118,21 @@ function theDefender(){
 		return sidious;
 	}
 }
+
+function theDefenderHTML(){
+	if(obi.position === "defender")
+		return obiHTML;
+	else if (luke.position === "defender"){
+		return lukeHTML;
+	}
+	else if (maul.position === "defender"){
+		return maulHTML;
+	}
+	else if (sidious.position === "defender"){
+		return sidiousHTML;
+	}
+}
+
 
 //Game starts here --------------------------------------------------
 
@@ -159,8 +188,20 @@ attackbuttonHTML.on("click", function(){
 	usersCharacter().health -= theDefender().attackPower;
 
 	UpdateHealthBars();
-	if(theDefender().health <= 0 || usersCharacter().health <= 0){
-		console.log("GAME OVER");
+	if(theDefender().health <= 0){
+		console.log("he dead");
+		theDefender().health = 0;
+		UpdateHealthBars();
+		$("#Defender").empty();
+		theDefender().position = "dead";
+		
+	}
+
+	if(usersCharacter().health <= 0){
+		console.log("you died");
+		usersCharacter().health = 0;
+		UpdateHealthBars();
+		usersCharacter().position = "dead"
 	}
 
 	
