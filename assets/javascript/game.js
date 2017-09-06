@@ -11,6 +11,8 @@ var maulHealthHTML = $("#maul-health");
 var attackbuttonHTML = $("#Attack-Button");
 var atkMessageHTML = $("#atk-message");
 var defenderMessageHTML = $("#defender-message");
+var winsHTML = $("#wins");
+var lossesHTML = $("#losses");
 
 //characters 
 var obi = {
@@ -62,6 +64,12 @@ function UpdateHealthBars(){ //this will update the health on the html
 	lukeHealthHTML.html(luke.health);
 	sidiousHealthHTML.html(sidious.health);
 	maulHealthHTML.html(maul.health);
+
+}
+
+function updateWinLoss(){
+	lossesHTML.html("Losses: " + losses);
+	winsHTML.html("Wins: " + wins);
 }
 // make sure you pass in the parameters correctly. 
 function SelectACharacter(yourCharacter, enemy1, enemy2, enemy3, yourCharacterHTML, enemy1HTML, enemy2HTML, enemy3HTML){
@@ -74,6 +82,10 @@ function SelectACharacter(yourCharacter, enemy1, enemy2, enemy3, yourCharacterHT
 		enemy1.position = "enemy";
 		enemy2.position = "enemy";
 		enemy3.position = "enemy";
+		//assign new atkPower to make game a bit more difficult
+		enemy1.attackPower = 5;
+		enemy2.attackPower = 12;
+		enemy3.attackPower = 17;
 
 }
 // 
@@ -140,9 +152,19 @@ function theDefenderHTML(){
 	}
 }
 
+// pass the three characters in and check if they all died
+function areTheyAllDead(enemy1, enemy2, enemy3){
+	if (enemy1.position === "dead" && enemy2.position === "dead" && enemy3.position === "dead"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 function restartGame(){
 	
-	// set characters to orginal state. 
+	// set characters to original state. 
 	obi.health = 120;
 	obi.attackPower = 8;
 	obi.position = "available";
@@ -162,7 +184,7 @@ function restartGame(){
 	$("#CharacterSelection").append(lukeHTML);
 	$("#CharacterSelection").append(sidiousHTML);
 	$("#CharacterSelection").append(maulHTML);
-	//resetEvents();
+
 	//this needs to be false to let the player pick a new character. 
 	isGameStarted = false;
 }
@@ -171,6 +193,7 @@ function restartGame(){
 //Game starts here --------------------------------------------------
 
 UpdateHealthBars();
+updateWinLoss();
 
 // The on click events ----------------------------- 
 obiHTML.on("click", function(){ 
@@ -215,11 +238,15 @@ maulHTML.on("click", function(){
 
 
 attackbuttonHTML.on("click", function(){
+	if(!isThereADefender()){
+		atkMessageHTML.html("There must be a defender in order to attack.");
+		return;
+	}
 	//defenders health is reduced by the amount of atkpower of your characters 
 	theDefender().health -= usersCharacter().attackPower; 
 	atkMessageHTML.html("You attacked " + theDefender().name + " for " + usersCharacter().attackPower + " damage!" );
 	// your characters atk power increases with atk 
-	usersCharacter().attackPower += 1;
+	usersCharacter().attackPower += 9;
 	// your characters health is decreased by defenders atkpower
 	usersCharacter().health -= theDefender().attackPower;
 	defenderMessageHTML.html(theDefender().name + " attacked you for " + theDefender().attackPower + " damage!");
@@ -227,26 +254,29 @@ attackbuttonHTML.on("click", function(){
 
 	UpdateHealthBars();
 	if(theDefender().health <= 0){ //if the defender has less than or 0 hp
-		console.log("he dead"); 
 		theDefender().health = 0; //set his hp to 0 so that it isnt negative
 		UpdateHealthBars(); //update html 
 		theDefenderHTML().detach(); // empty the defender div 
 		atkMessageHTML.html("You killed " + theDefender().name);
 		defenderMessageHTML.html(" ");	
 		theDefender().position = "dead"; // make him die and makes attacking disabled 
+
+		//check if they picked sidious, luke, maul and obi and see if all the enemies are dead. 
+		if(areTheyAllDead(luke, obi, maul) || areTheyAllDead(obi, maul, sidious) || areTheyAllDead(obi, luke, sidious) || areTheyAllDead(luke, maul, sidious)){
+			wins += 1;
+			updateWinLoss();
+			restartGame();
+		}
 	}
 
 	if(usersCharacter().health <= 0){ //if you have less than or 0 hp 
-		console.log("you died");
-		usersCharacter().health = 0; //set your helth to 0 so it isnt negative 
+		usersCharacter().health = 0; //set your health to 0 so it isn't negative 
 		UpdateHealthBars(); //update html 
 		atkMessageHTML.html(theDefender().name + "  killed you. You lost." );
 		defenderMessageHTML.html(" ");	
 		usersCharacter().position = "dead" //make you dead and unable to attack. 
 		losses += 1;
+		updateWinLoss();
 		restartGame();
 	}
-
-
-
 });
