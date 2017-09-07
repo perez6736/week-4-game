@@ -1,7 +1,14 @@
+body, html{
+	height: 100%;
+}
+
 body{
+	height: 100%;
 	background-image: url("../images/hoth.jpg");
-	background-repeat:no-repeat;
-   	background-size:cover;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   	height: 100%; 
 }
 
 .character {
@@ -13,6 +20,7 @@ body{
 	margin-left: 15px;
 	color: red;
 	font-weight: bold;
+
 }
 
 #Attack-Button{
@@ -21,11 +29,12 @@ body{
 }
 
 .character-image{
-	position: relative;
-	height: 95px;
-	bottom: 72px;
+	position: absolute;
+	height: 100%;
 	z-index: -1;
-	width: 95%;
+	width: 80%;
+	top: 0.1px;
+	left: 10px;
 }
 
 #Attack-Button{
